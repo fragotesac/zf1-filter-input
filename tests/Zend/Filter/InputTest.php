@@ -20,16 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @see Zend_Filter_Input
- */
-require_once 'Zend/Filter/Input.php';
-
-/**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
 
 /**
  * @category   Zend
@@ -49,8 +39,6 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
     function testIfCustomMessagesOnValidatorInstancesCanBeUsed()
     {
         // test with a Digits validator
-        require_once 'Zend/Validate/Digits.php';
-        require_once 'Zend/Validate/NotEmpty.php';
         $data = array('field1' => 'invalid data');
         $customMessage = 'Hey, that\'s not a Digit!!!';
         $validator = new Zend_Validate_Digits();
@@ -63,7 +51,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $this->assertFalse($input->isValid(), 'invalid input is valid');
         $messages = $input->getMessages();
         $this->assertSame($messages['field1']['notDigits'], $customMessage, 'The custom message is not used');
-        
+
         // test with a NotEmpty validator
         $data = array('field1' => '');
         $customMessage = 'You should really supply a value...';
@@ -78,24 +66,21 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $messages = $input->getMessages();
         $this->assertSame($messages['field1']['isEmpty'], $customMessage, 'For the NotEmpty validator the custom message is not used');
     }
-    
+
     /**
-     * 
+     *
      * If setAllowEmpty(true) is called, all fields are optional, but fields with
      * a NotEmpty validator attached to them, should contain a non empty value.
-     * 
+     *
      * @group ZF-9289
      */
     function testAllowEmptyTrueRespectsNotEmtpyValidators()
     {
-        require_once 'Zend/Validate/NotEmpty.php';
-        require_once 'Zend/Validate/Digits.php';
-        
         $data = array(
             'field1' => 'foo',
             'field2' => ''
         );
-        
+
         $validators = array(
             'field1' => array(
                 new Zend_Validate_NotEmpty(),
@@ -105,22 +90,22 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
                     )
                 )
             ),
-        
+
             'field2' => array(
                 new Zend_Validate_NotEmpty()
             )
         );
-        
+
         $options = array(Zend_Filter_Input::ALLOW_EMPTY => true);
         $input = new Zend_Filter_Input( null, $validators, $data, $options );
         $this->assertFalse($input->isValid(), 'Ouch, the NotEmpty validators are ignored!');
-        
+
         $validators = array(
             'field1' => array(
                 'Digits',
-                array('NotEmpty', 'integer'), 
+                array('NotEmpty', 'integer'),
                 Zend_Filter_Input::MESSAGES => array(
-                    1 => 
+                    1 =>
                     array(
                         Zend_Validate_NotEmpty::IS_EMPTY => '\'field1\' is required'
                     )
@@ -128,7 +113,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             ),
 
         );
-        
+
         $data = array(
             'field1' => 0,
             'field2' => ''
@@ -136,14 +121,14 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $options = array(Zend_Filter_Input::ALLOW_EMPTY => true);
         $input = new Zend_Filter_Input( null, $validators, $data, $options );
         $this->assertFalse($input->isValid(), 'Ouch, if the NotEmpty validator is not the first rule, the NotEmpty validators are ignored !');
-        
+
         // and now with a string 'NotEmpty' instead of an instance:
-        
+
         $validators = array(
             'field1' => array(
                 'NotEmpty',
                 Zend_Filter_Input::MESSAGES => array(
-                    0 => 
+                    0 =>
                     array(
                         Zend_Validate_NotEmpty::IS_EMPTY => '\'field1\' is required'
                     )
@@ -151,23 +136,23 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             ),
 
         );
-        
+
         $data = array(
             'field1' => '',
             'field2' => ''
         );
-        
+
         $options = array(Zend_Filter_Input::ALLOW_EMPTY => true);
         $input = new Zend_Filter_Input( null, $validators, $data, $options );
         $this->assertFalse($input->isValid(), 'If the NotEmpty validator is a string, the NotEmpty validator is ignored !');
-        
+
         // and now with an array
-        
+
         $validators = array(
             'field1' => array(
                 array('NotEmpty', 'integer'),
                 Zend_Filter_Input::MESSAGES => array(
-                    0 => 
+                    0 =>
                     array(
                         Zend_Validate_NotEmpty::IS_EMPTY => '\'field1\' is required'
                     )
@@ -175,21 +160,21 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             ),
 
         );
-        
+
         $data = array(
             'field1' => 0,
             'field2' => ''
         );
-        
+
         $options = array(Zend_Filter_Input::ALLOW_EMPTY => true);
         $input = new Zend_Filter_Input( null, $validators, $data, $options );
         $this->assertFalse($input->isValid(), 'If the NotEmpty validator is an array, the NotEmpty validator is ignored !');
-    } 
+    }
 
      /**
       * @group ZF-8446
       * The issue reports about nested error messages. This is to assure these do not occur.
-      * 
+      *
       * Example:
       * Expected Result
       *      array(2) {
@@ -216,12 +201,11 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
      */
     public function testNoNestedMessageArrays()
     {
-        require_once 'Zend/Validate/NotEmpty.php';
         $data = array(
             'field1' => '',
             'field2' => ''
         );
-        
+
         $validators = array(
             'field1' => array(
                 new Zend_Validate_NotEmpty(),
@@ -231,27 +215,25 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
                     )
                 )
             ),
-        
+
             'field2' => array(
                 new Zend_Validate_NotEmpty()
             )
         );
-        
+
         $input = new Zend_Filter_Input( null, $validators, $data );
-        
+
         $this->assertFalse($input->isValid());
         $messages = $input->getMessages();
         $this->assertNotInternalType('array', $messages['field1']['isEmpty'], 'oh oh, we  may have got nested messages');
         $this->assertTrue(isset($messages['field1']['isEmpty']), 'oh no, we not even got the normally expected messages');
     }
-    
+
     /**
      * @group ZF-11142, ZF-8446, ZF-9289
      */
     public function testTwoValidatorsInChainShowCorrectError()
     {
-        require_once 'Zend/Validate/NotEmpty.php';
-        require_once 'Zend/Validate/Float.php';
         $validators = array(
             'field1'  => array(
                     'NotEmpty', 'Float',
@@ -265,7 +247,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
                     'presence' => 'required'
                 )
         );
-        
+
         $data = array('field1' => 0.0, 'field2' => '');
         $input = new Zend_Filter_Input(null, $validators, $data);
         $this->assertFalse($input->isValid());
@@ -1457,6 +1439,9 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
 
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testSetPluginLoader()
     {
         $input = new Zend_Filter_Input(null, null);
@@ -2059,10 +2044,6 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
      */
     public function testSettingNotEmptyMessageAndMessagePerKeyAndMessagePerArray()
     {
-        require_once 'Zend/Validate/NotEmpty.php';
-        require_once 'Zend/Validate/Regex.php';
-        require_once 'Zend/Validate/StringLength.php';
-
         $filters = array( );
         $validators = array(
             'street' => array (
@@ -2103,10 +2084,6 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
      */
     public function testSettingMultipleNotEmptyMessages()
     {
-        require_once 'Zend/Validate/NotEmpty.php';
-        require_once 'Zend/Validate/Regex.php';
-        require_once 'Zend/Validate/StringLength.php';
-
         $filters = array( );
         $validators = array(
             'name' => array('NotEmpty','messages' => 'Please enter your name'),
@@ -2134,7 +2111,6 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
      */
     public function testTranslateNotEmptyMessages()
     {
-        require_once 'Zend/Translate/Adapter/Array.php';
         $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'), 'en');
 
         $validators = array(
@@ -2159,9 +2135,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
      */
     public function testTranslateNotEmptyMessagesByUsingRegistry()
     {
-        require_once 'Zend/Translate/Adapter/Array.php';
         $translator = new Zend_Translate_Adapter_Array(array('missingMessage' => 'Still missing'), 'en');
-        require_once 'Zend/Registry.php';
         Zend_Registry::set('Zend_Translate', $translator);
 
         $validators = array(
@@ -2282,13 +2256,14 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $input = new Zend_Filter_Input( null, $validators, $data, $options );
         $this->assertFalse($input->isValid(), 'If the NotEmpty validator is an array, the NotEmpty validator is ignored !');
     }
-    
+
     /**
-     * This test doesn't include any assertions as it's purpose is to 
-     * ensure that passing an empty array value into a $validators rule 
+     * This test doesn't include any assertions as it's purpose is to
+     * ensure that passing an empty array value into a $validators rule
      * doesn't cause a notice to be emitted
-     *  
+     *
      * @group ZF-11819
+     * @doesNotPerformAssertions
      */
     public function testValidatorRuleCanHaveEmptyArrayAsMetacommandValue()
     {
@@ -2298,7 +2273,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
 
         $validate = new Zend_Filter_Input(NULL, $validators);
         $validate->isValid();
-    }    
+    }
 }
 
 class MyZend_Filter_Date implements Zend_Filter_Interface

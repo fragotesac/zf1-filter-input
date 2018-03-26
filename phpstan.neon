@@ -1,0 +1,5 @@
+parameters:
+    ignoreErrors:
+        - '#Casting to .+ something that.s already .+\.#'
+        - '#Method Zend_Filter_Input::_getFilter\(\) should return Zend_Filter_Interface but returns Zend_Filter_Interface\|Zend_Validate_Interface\.#'
+        - '#Method Zend_Filter_Input::_getValidator\(\) should return Zend_Validate_Interface but returns Zend_Filter_Interface\|Zend_Validate_Interface\.#'
