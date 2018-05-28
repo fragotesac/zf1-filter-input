@@ -1,4 +1,7 @@
 parameters:
+    excludes_analyse:
+        - %rootDir%/../../../vendor/*
+        - %rootDir%/../../../tests/*
     ignoreErrors:
         - '#Casting to .+ something that.s already .+\.#'
         - '#Method Zend_Filter_Input::_getFilter\(\) should return Zend_Filter_Interface but returns Zend_Filter_Interface\|Zend_Validate_Interface\.#'
