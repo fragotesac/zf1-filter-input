@@ -861,7 +861,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $messages = $input->getMessages();
         $this->assertInternalType('array', $messages);
         $this->assertEquals(array('nick'), array_keys($messages));
-        $this->assertEquals(1, count($messages['nick']));
+        $this->assertCount(1, $messages['nick']);
     }
 
     public function testValidatorAllowEmptySetNotEmptyMessage()
@@ -1031,7 +1031,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $messages = $input->getMessages();
         $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
-        $this->assertEquals(1, count($messages['month']));
+        $this->assertCount(1, $messages['month']);
         $this->assertEquals($digitsMesg, current($messages['month']));
     }
 
@@ -1061,7 +1061,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $messages = $input->getMessages();
         $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
-        $this->assertEquals(2, count($messages['month']));
+        $this->assertCount(2, $messages['month']);
         $this->assertEquals($digitsMesg, $messages['month']['notDigits']);
         $this->assertEquals($betweenMesg, $messages['month']['notBetween']);
     }
@@ -1092,7 +1092,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $messages = $input->getMessages();
         $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field1'), array_keys($messages));
-        $this->assertEquals(3, count($messages['field1']));
+        $this->assertCount(3, $messages['field1']);
         $this->assertEquals($digitsMesg, $messages['field1']['notDigits']);
         $this->assertEquals($betweenMesg, $messages['field1']['notBetween']);
     }
@@ -1121,7 +1121,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $messages = $input->getMessages();
         $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
-        $this->assertEquals(2, count($messages['month']));
+        $this->assertCount(2, $messages['month']);
         $this->assertEquals("'13abc' must contain only digits", current($messages['month']));
         /**
          * @todo $this->assertEquals($betweenMesg, next($messages['month']));
@@ -1148,7 +1148,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $messages = $input->getMessages();
         $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
-        $this->assertEquals(1, count($messages['month']));
+        $this->assertCount(1, $messages['month']);
         // $this->assertEquals($digitsMesg, $messages['month'][0]);
     }
 
@@ -1178,7 +1178,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $messages = $input->getMessages();
         $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
-        $this->assertEquals(2, count($messages['month']));
+        $this->assertCount(2, $messages['month']);
         // $this->assertEquals($digitsMesg, $messages['month'][0]);
         // $this->assertEquals($betweenMesg, $messages['month'][1]);
     }
@@ -1209,7 +1209,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $messages = $input->getMessages();
         $this->assertInternalType('array', $messages);
         $this->assertEquals(array('month'), array_keys($messages));
-        $this->assertEquals(2, count($messages['month']));
+        $this->assertCount(2, $messages['month']);
         // $this->assertEquals($digitsMesg, $messages['month'][0]);
         // $this->assertEquals($betweenMesg, $messages['month'][1]);
     }
@@ -1615,7 +1615,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $messages = $input->getMessages();
         $this->assertInternalType('array', $messages);
         $this->assertEquals(array('field1'), array_keys($messages));
-        $this->assertEquals(1, count($messages['field1']), 'Expected rule for field1 to break 1 validator');
+        $this->assertCount(1, $messages['field1'], 'Expected rule for field1 to break 1 validator');
         $this->assertEquals(
             "'150' is not between '1' and '100', inclusively",
             current($messages['field1'])
@@ -1782,7 +1782,7 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
 
         $multi = $input->getEscaped('multiSelect');
         $this->assertInternalType('array', $multi);
-        $this->assertEquals(3, count($multi));
+        $this->assertCount(3, $multi);
         $this->assertEquals(array('C&amp;H', 'B&amp;O', 'AT&amp;T'), $multi);
     }
 
