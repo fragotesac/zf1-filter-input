@@ -514,8 +514,8 @@ class Zend_Filter_Input
 
                     foreach ($value as $prefix) {
                         $this->addValidatorPrefixPath(
-                                $prefix,
-                                str_replace('_', DIRECTORY_SEPARATOR, $prefix)
+                            $prefix,
+                            str_replace('_', DIRECTORY_SEPARATOR, $prefix)
                         );
                     }
                     break;
@@ -526,8 +526,8 @@ class Zend_Filter_Input
 
                     foreach ($value as $prefix) {
                         $this->addFilterPrefixPath(
-                                $prefix,
-                                str_replace('_', DIRECTORY_SEPARATOR, $prefix)
+                            $prefix,
+                            str_replace('_', DIRECTORY_SEPARATOR, $prefix)
                         );
                     }
                     break;
@@ -726,7 +726,9 @@ class Zend_Filter_Input
         }
 
         $message = str_replace('%rule%', $rule, $message);
+        /** @var string $message */
         $message = str_replace('%field%', $field, $message);
+        
         return $message;
     }
 
@@ -746,6 +748,7 @@ class Zend_Filter_Input
         }
 
         $message = str_replace('%rule%', $rule, $message);
+        /** @var string $message */
         $message = str_replace('%field%', $field, $message);
         return $message;
     }

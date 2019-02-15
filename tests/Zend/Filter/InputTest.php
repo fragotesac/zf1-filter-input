@@ -681,13 +681,13 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(array('rule2', 'rule3'), array_keys($messages));
         $this->assertEquals(
             array('isEmpty' => "You must give a non-empty value for field 'password3'"),
-                            $messages['rule2']
+            $messages['rule2']
         );
         $this->assertEquals(
             array('isEmpty'                 => "You must give a non-empty value for field 'password3'",
                                           0 => "You must give a non-empty value for field 'password4'"
                                  ),
-                            $messages['rule3']
+            $messages['rule3']
         );
     }
 
