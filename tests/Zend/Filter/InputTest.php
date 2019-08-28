@@ -724,12 +724,12 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             $messageUserDefined,
             current($messages['field1']),
             'Expected message to break 2 validators, the message of the latter overwriting that of the former'
-            );
+        );
         $this->assertEquals(
             "'150' is not between '1' and '100', inclusively",
             current($messages['field2']),
             'Expected rule for field2 to break the validation chain at the first validator'
-            );
+        );
     }
 
     public function testValidatorAllowEmpty()
