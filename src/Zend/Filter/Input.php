@@ -214,7 +214,7 @@ class Zend_Filter_Input
      *
      * @param  Zend_Loader_PluginLoader_Interface $loader
      * @param  string $type 'filter' or 'validate'
-     * @return Zend_Filter_Input
+     * @return $this
      * @throws Zend_Filter_Exception on invalid type
      */
     public function setPluginLoader(Zend_Loader_PluginLoader_Interface $loader, $type)
@@ -228,8 +228,6 @@ class Zend_Filter_Input
             default:
                 throw new Zend_Filter_Exception(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
         }
-
-        return $this;
     }
 
     /**
@@ -494,7 +492,7 @@ class Zend_Filter_Input
 
     /**
      * @param array $options
-     * @return Zend_Filter_Input
+     * @return $this
      * @throws Zend_Filter_Exception if an unknown option is given
      */
     public function setOptions(array $options)
@@ -540,7 +538,6 @@ class Zend_Filter_Input
                     break;
                 default:
                     throw new Zend_Filter_Exception("Unknown option '$option'");
-                    break;
             }
         }
 
@@ -728,11 +725,13 @@ class Zend_Filter_Input
         $message = str_replace('%rule%', $rule, $message);
         /** @var string $message */
         $message = str_replace('%field%', $field, $message);
-        
+
         return $message;
     }
 
     /**
+     * @param string $rule
+     * @param string $field
      * @return string
      */
     protected function _getNotEmptyMessage($rule, $field)

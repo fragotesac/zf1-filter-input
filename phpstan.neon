@@ -1,5 +1,6 @@
 parameters:
-    level: 6
+    checkMissingIterableValueType: false
+    level: 7
     paths:
         - ./
     excludes_analyse:
@@ -8,6 +9,15 @@ parameters:
     ignoreErrors:
         - '#Method Zend_Filter_Input::_getFilter\(\) should return Zend_Filter_Interface but returns Zend_Filter_Interface\|Zend_Validate_Interface\.#'
         - '#Method Zend_Filter_Input::_getValidator\(\) should return Zend_Validate_Interface but returns Zend_Filter_Interface\|Zend_Validate_Interface\.#'
-        - 
+        -
             message: '#Method Zend_Filter_Input::_getFilterOrValidator\(\) should return Zend_Filter_Interface\|Zend_Validate_Interface but returns object\.#'
             path: %currentWorkingDirectory%/src/Zend/Filter/Input.php
+        -
+            message: '#Parameter \#2 \$field of method Zend_Filter_Input::_getNotEmptyMessage\(\) expects string, int\|string given\.#'
+            path: './src/Zend/Filter/Input.php'
+        -
+            message: '#Parameter \#2 \$field of method Zend_Filter_Input::_getNotEmptyMessage\(\) expects string, int\|string\|false given\.#'
+            path: './src/Zend/Filter/Input.php'
+        -
+            message: '#Parameter \#1 \$argument of class ReflectionClass constructor expects class-string<T of object>\|T of object, string given\.#'
+            path: './src/Zend/Filter/Input.php'
