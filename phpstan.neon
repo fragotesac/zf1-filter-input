@@ -16,8 +16,5 @@ parameters:
             message: '#Parameter \#2 \$field of method Zend_Filter_Input::_getNotEmptyMessage\(\) expects string, int\|string given\.#'
             path: './src/Zend/Filter/Input.php'
         -
-            message: '#Parameter \#2 \$field of method Zend_Filter_Input::_getNotEmptyMessage\(\) expects string, int\|string\|false given\.#'
-            path: './src/Zend/Filter/Input.php'
-        -
-            message: '#Parameter \#1 \$argument of class ReflectionClass constructor expects class-string<T of object>\|T of object, string given\.#'
+            message: '#Parameter \#1 \$(argument|objectOrClass) of class ReflectionClass constructor expects class-string<T of object>\|T of object, string given\.#'
             path: './src/Zend/Filter/Input.php'
