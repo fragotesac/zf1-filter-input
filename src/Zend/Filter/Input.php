@@ -1064,7 +1064,7 @@ class Zend_Filter_Input
             }
 
             foreach ($field as $key => $value) {
-                if ($validatorRule[self::ALLOW_EMPTY]  &&  !$notEmptyValidator->isValid($value)) {
+                if ($validatorRule[self::ALLOW_EMPTY] && !$notEmptyValidator->isValid($value)) {
                     // Field is empty AND it's allowed. Do nothing.
                     continue;
                 }
