@@ -1435,8 +1435,9 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
         $input = new Zend_Filter_Input(null, null);
 
         $loader = $input->getPluginLoader(Zend_Filter_Input::VALIDATE);
-        $this->assertTrue(
-            $loader instanceof Zend_Loader_PluginLoader,
+        $this->assertInstanceOf(
+            Zend_Loader_PluginLoader::class,
+            $loader,
             'Expected object of type Zend_Loader_PluginLoader, got ',
             get_class($loader)
         );
@@ -1445,8 +1446,9 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             $loader = $input->getPluginLoader('foo');
             $this->fail('Expected to catch Zend_Filter_Exception');
         } catch (Zend_Exception $e) {
-            $this->assertTrue(
-                $e instanceof Zend_Filter_Exception,
+            $this->assertInstanceOf(
+                Zend_Filter_Exception::class,
+                $e,
                 'Expected object of type Zend_Filter_Exception, got ' . get_class($e)
             );
             $this->assertEquals(
@@ -1478,8 +1480,9 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             $input->setPluginLoader($loader, 'foo');
             $this->fail('Expected to catch Zend_Filter_Exception');
         } catch (Zend_Exception $e) {
-            $this->assertTrue(
-                $e instanceof Zend_Filter_Exception,
+            $this->assertInstanceOf(
+                Zend_Filter_Exception::class,
+                $e,
                 'Expected object of type Zend_Filter_Exception, got ' . get_class($e)
             );
             $this->assertEquals(
@@ -1503,8 +1506,9 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
             $this->fail('Expected to catch Zend_Filter_Exception');
         } catch (Zend_Exception $e) {
-            $this->assertTrue(
-                $e instanceof Zend_Loader_PluginLoader_Exception,
+            $this->assertInstanceOf(
+                Zend_Loader_PluginLoader_Exception::class,
+                $e,
                 'Expected object of type Zend_Filter_Exception, got ' . get_class($e)
             );
             $this->assertStringContainsString('not found in the registry', $e->getMessage());
@@ -1527,8 +1531,9 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             $this->assertTrue($input->hasInvalid(), 'Expected hasInvalid() to return true');
             $this->fail('Expected to catch Zend_Filter_Exception');
         } catch (Zend_Exception $e) {
-            $this->assertTrue(
-                $e instanceof Zend_Filter_Exception,
+            $this->assertInstanceOf(
+                Zend_Filter_Exception::class,
+                $e,
                 'Expected object of type Zend_Filter_Exception, got ' . get_class($e)
             );
             $this->assertEquals(
@@ -1561,8 +1566,9 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             $input->setDefaultEscapeFilter(new StdClass());
             $this->fail('Expected to catch Zend_Filter_Exception');
         } catch (Zend_Exception $e) {
-            $this->assertTrue(
-                $e instanceof Zend_Filter_Exception,
+            $this->assertInstanceOf(
+                Zend_Filter_Exception::class,
+                $e,
                 'Expected object of type Zend_Filter_Exception, got ' . get_class($e)
             );
             $this->assertEquals('Escape filter specified does not implement Zend_Filter_Interface', $e->getMessage());
@@ -1713,8 +1719,9 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             $input = new Zend_Filter_Input(null, null, null, $options);
             $this->fail('Expected to catch Zend_Filter_Exception');
         } catch (Zend_Exception $e) {
-            $this->assertTrue(
-                $e instanceof Zend_Filter_Exception,
+            $this->assertInstanceOf(
+                Zend_Filter_Exception::class,
+                $e,
                 'Expected object of type Zend_Filter_Exception, got ' . get_class($e)
             );
             $this->assertEquals("Unknown option 'unknown'", $e->getMessage());
@@ -1914,8 +1921,9 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             $input->process();
             $this->fail('Expected to catch Zend_Filter_Exception');
         } catch (Zend_Exception $e) {
-            $this->assertTrue(
-                $e instanceof Zend_Filter_Exception,
+            $this->assertInstanceOf(
+                Zend_Filter_Exception::class,
+                $e,
                 'Expected object of type Zend_Filter_Exception, got ' . get_class($e)
             );
             $this->assertEquals('Input has invalid fields', $e->getMessage());
@@ -1950,8 +1958,9 @@ class Zend_Filter_InputTest extends PHPUnit\Framework\TestCase
             $input->process();
             $this->fail('Expected to catch Zend_Filter_Exception');
         } catch (Zend_Exception $e) {
-            $this->assertTrue(
-                $e instanceof Zend_Filter_Exception,
+            $this->assertInstanceOf(
+                Zend_Filter_Exception::class,
+                $e,
                 'Expected object of type Zend_Filter_Exception, got ' . get_class($e)
             );
             $this->assertEquals('Input has missing fields', $e->getMessage());
