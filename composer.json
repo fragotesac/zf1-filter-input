@@ -11,11 +11,11 @@
     "prefer-stable": true,
     "require": {
         "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
-        "diablomedia/zendframework1-loader": "^1.0.0",
-        "diablomedia/zendframework1-registry": "^1.0.2",
-        "diablomedia/zendframework1-translate": "^1.0.0",
-        "diablomedia/zendframework1-validate": "^1.0.0",
-        "diablomedia/zendframework1-filter": "^1.0.0"
+        "diablomedia/zendframework1-loader": "^1.0.5",
+        "diablomedia/zendframework1-registry": "^1.0.5",
+        "diablomedia/zendframework1-translate": "^1.0.5",
+        "diablomedia/zendframework1-validate": "^1.0.5",
+        "diablomedia/zendframework1-filter": "^1.0.6"
     },
     "autoload": {
         "classmap": [
